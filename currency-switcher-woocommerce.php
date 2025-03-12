@@ -108,7 +108,7 @@ final class Alg_WC_Currency_Switcher {
 	function __construct() {
 
 		// Set up localisation
-		load_plugin_textdomain( 'currency-switcher-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );		
+		add_action( 'init', array( $this, 'load_localization' ) );	
 
 		// Include required files
 		$this->includes();
@@ -128,6 +128,13 @@ final class Alg_WC_Currency_Switcher {
 		add_action( 'wc_after_products_ending_sales', array( $this, 'cleanup_ended_sales_prices' ) );
 		
 	}	
+			
+	/**
+	 * @since   2.16.4
+	 */
+	public function load_localization() {
+		load_plugin_textdomain( 'currency-switcher-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/langs/' );
+	}
 
 	/**
 	 * Show action links on the plugin screen
